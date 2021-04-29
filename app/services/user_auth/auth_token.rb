@@ -16,6 +16,10 @@ module UserAuth
         @token = JWT.encode(@payload, secret_key, algorithm, header_fields)
       end
     end
+    # subjectからユーザーを検索する
+    def entity_for_user
+      User.find @payload["sub"]
+    end
     private
       # エンコードキー(config/initializers/user_auth.rb)
       def secret_key
