@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      # 追加
-       resources :users, only:[:index]
-      # 削除
-      # resources :hello, only:[:index]
+      resources :users, only:[] do
+        get :current_user, action: :show, on: :collection
+      end
     end
   end
 end

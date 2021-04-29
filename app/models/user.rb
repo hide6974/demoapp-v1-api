@@ -38,8 +38,10 @@ class User < ApplicationRecord
         users = User.where.not(id: id)
         users.find_activated(email).present?
     end
-    
-    # Userクラスの一番下に追加
+    # 共通のJSONレスポンス
+    def my_json
+        as_json(only: [:id, :name, :email, :created_at])
+    end
     private
 
     # email小文字化
