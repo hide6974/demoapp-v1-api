@@ -20,6 +20,11 @@ module UserAuth
     def entity_for_user
       User.find @payload["sub"]
     end
+    # token_lifetimeの日本語変換を返す
+    def lifetime_text
+      time, period = @lifetime.inspect.sub(/s\z/,"").split
+      time + I18n.t("datetime.periods.#{period}", default: "")
+    end
     private
       # エンコードキー(config/initializers/user_auth.rb)
       def secret_key
